@@ -1,4 +1,5 @@
 import * as React from "react"
+import {useState} from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -8,6 +9,25 @@ import Seo from "../components/seo"
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
+
+  const [search, setSearch] = useState({
+    query: ``,
+    filteredPosts: posts
+  })
+
+  const handleSearch = (event) => {
+
+    const queryStr = event.target.value    // input field value
+    const postsAr = posts.filter(post => 
+      post.frontmatter.title.toUpperCase().includes(queryStr.toUpperCase())
+    )
+
+    setSearch({
+      query: queryStr,
+      filteredPosts: postsAr
+    })
+
+  }
 
   if (posts.length === 0) {
     return (
@@ -27,8 +47,9 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle} className="featured-article">
       <Seo title="All posts" />
       {/* <Bio /> */}
+      <input type="search" name="find" placeholder="Search..." className="search" onChange={handleSearch} value={search.query}/>
       <ol style={{ listStyle: `none` }} className="featured-article-list-container">
-        {posts.map(post => {
+        {search.filteredPosts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
           const articleImg = post.frontmatter.articleImg
 
