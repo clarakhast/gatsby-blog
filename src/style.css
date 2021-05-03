@@ -451,7 +451,7 @@ article p {
           FOOTER
 *******************************/
 .footer-subscribe{
-  background-image: url("images/footer-bg.svg");
+  background-image: url("images/footer-bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -538,15 +538,18 @@ hr {
 
 @media (max-width: 46rem) {
 
-  header {
+  .home-header, .about-header, .footer-subscribe {
     background-color: var(--light-header-background);
     background-image: none;
     height:100%;
-    padding-bottom:5rem;
+    padding:2rem 1rem;
   }
 
+  .about-header{
+    background-color:white;
+  }
   .intro-text {
-    width:75%;
+    width:100%;
     margin:0 auto;
   }
   .navbar a.logo {
@@ -554,7 +557,7 @@ hr {
     font-size:1.3rem;
   }
 
-  .nav-link-container, .social-media {
+  .nav-link-container a:nth-child(n+2):nth-child(-n+4), .social-media {
     display:none;
   }
 
@@ -573,9 +576,16 @@ hr {
   .footer-copyright {
     display: block;
   }
+  .footer-subscribe p {
+    width:100%;
+  }
   blockquote {
     padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);
     margin-left: var(--spacing-0);
+  }
+
+  .featured-article {
+    margin: 2rem 1rem;
   }
 
 }
