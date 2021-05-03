@@ -24,12 +24,13 @@ const BlogIndex = ({ data, location }) => {
   }
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle} className="featured-article">
       <Seo title="All posts" />
-      <Bio />
-      <ol style={{ listStyle: `none` }}>
+      {/* <Bio /> */}
+      <ol style={{ listStyle: `none` }} className="featured-article-list-container">
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
+          const articleImg = post.frontmatter.articleImg
 
           return (
             <li key={post.fields.slug}>
@@ -38,21 +39,25 @@ const BlogIndex = ({ data, location }) => {
                 itemScope
                 itemType="http://schema.org/Article"
               >
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
                 <section>
+                  <img src={articleImg} alt={title} className="article-preview" />
+                  <div className="featured-title-wrapper">
+                    <h3>
+                      <Link to={post.fields.slug} itemProp="url">
+                        <span itemProp="headline">{title}</span>
+                      </Link>
+                    </h3>
+                    <small>{post.frontmatter.date}</small>
+                  </div>
                   <p
                     dangerouslySetInnerHTML={{
                       __html: post.frontmatter.description || post.excerpt,
                     }}
                     itemProp="description"
                   />
+                  <small><span className="material-icons">share</span> Share</small>
+                  <small><span className="material-icons">chat</span> 25</small>
+                  <small><span className="material-icons">visibility</span> 54</small>
                 </section>
               </article>
             </li>
@@ -82,6 +87,7 @@ export const pageQuery = graphql`
           date(formatString: "MMMM DD, YYYY")
           title
           description
+          articleImg
         }
       }
     }

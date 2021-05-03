@@ -79,6 +79,7 @@ module.exports = {
                 return Object.assign({}, node.frontmatter, {
                   description: node.excerpt,
                   date: node.frontmatter.date,
+                  articleImg: node.frontmatter.articleImg,
                   url: site.siteMetadata.siteUrl + node.fields.slug,
                   guid: site.siteMetadata.siteUrl + node.fields.slug,
                   custom_elements: [{ "content:encoded": node.html }],
@@ -121,6 +122,18 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: [
+          'material icons',
+          'lato:300,400,500,700',
+          'roboto:300,400,500,700',
+          'Quicksand:300,400,500,700',
+        ],
+      },
+    },
+    `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-gatsby-cloud`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
