@@ -131,9 +131,8 @@ const Layout = ({ location, title, children }) => {
       <header className="global-header about-header">
         {header}
         <section className="intro-text">
-        <h1>About PhotoBlog</h1>
+        <h1>{title}</h1>
         <p className="intro-text">Photography is the art, application, and practice of creating durable images by recording light, either electronically or by hand.</p>
-        <Link to="/" className="text-link">READ MORE</Link>
       </section>
       </header>
 
